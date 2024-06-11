@@ -340,8 +340,11 @@ module.exports = function (webpackEnv) {
               },
             },
             {
-              test: /\.svg$/,
+              test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
               use: [
+                {
+                  loader: require.resolve('babel-loader'),
+                },
                 {
                   loader: require.resolve('@svgr/webpack'),
                   options: {
@@ -352,14 +355,16 @@ module.exports = function (webpackEnv) {
                     },
                     titleProp: true,
                     ref: true,
+                    icon: true,
+                    babel: false
                   },
                 },
-                {
-                  loader: require.resolve('file-loader'),
-                  options: {
-                    name: 'static/media/[name].[hash].[ext]',
-                  },
-                },
+                // {
+                //   loader: require.resolve('file-loader'),
+                //   options: {
+                //     name: 'static/media/[name].[hash].[ext]',
+                //   },
+                // },
               ],
               issuer: {
                 and: [/\.(ts|tsx|js|jsx|md|mdx)$/],

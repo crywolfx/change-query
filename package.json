@@ -1,8 +1,8 @@
 {
-  "name": "chrome-extension-template",
+  "name": "change-query",
   "template": "react-web",
   "extension": {
-    "name": "chrome拓展开发模板"
+    "name": "修改浏览器页面链接参数"
   },
   "version": "0.1.0",
   "scripts": {
@@ -11,8 +11,12 @@
     "build": "node scripts/build.js"
   },
   "dependencies": {
+    "ahooks": "^3.8.0",
+    "antd": "^5.18.0",
     "chrome-extension-core": "^0.2.2",
     "lodash.debounce": "^4.0.8",
+    "qrcode": "^1.5.3",
+    "query-string": "^9.0.0",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
@@ -22,7 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

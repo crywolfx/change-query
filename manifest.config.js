@@ -12,8 +12,6 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     manifest_version: 3,
     name: isProduction ? name : `[development]${name}`,
     offline_enabled: true,
-    options_page: 'options.html',
-    devtools_page: "devtoolsEntry.html",
     permissions: [
       'tabs',
       'activeTab',
@@ -25,14 +23,6 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
       'contextMenus',
       enableInspectHeader && 'declarativeNetRequest',
     ].filter(Boolean),
-    content_scripts: [
-      {
-        matches: ['<all_urls>'],
-        css: [],
-        js: ['content/index.js', isHot && 'hotContent/index.js'].filter(Boolean),
-        run_at: 'document_end',
-      },
-    ],
     version,
     web_accessible_resources: [
       {
