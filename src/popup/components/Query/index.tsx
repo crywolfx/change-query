@@ -87,18 +87,21 @@ const Query: ForwardRefRenderFunction<QueryFormRef, QueryProps> = (
   return (
     <div className={classNames(props.className)} style={props.style}>
       <Title size={18}>参数设置</Title>
-      <div className={styles.quick}>
-        {quickData.map((item) => (
-          <div className={styles.quickItem} key={item.title}>
-            <div className={styles.quickTitle}>{item.title}</div>
-            <Switch
-              size="small"
-              checked={checkIsChecked(item)}
-              onChange={(e) => onChangeIsChecked(e, item)}
-            />
-          </div>
-        ))}
-      </div>
+      {(quickData.length && (
+        <div className={styles.quick}>
+          {quickData.map((item) => (
+            <div className={styles.quickItem} key={item.title}>
+              <div className={styles.quickTitle}>{item.title}</div>
+              <Switch
+                size="small"
+                checked={checkIsChecked(item)}
+                onChange={(e) => onChangeIsChecked(e, item)}
+              />
+            </div>
+          ))}
+        </div>
+      )) ||
+        null}
       <QueryForm ref={formRef}></QueryForm>
     </div>
   );
