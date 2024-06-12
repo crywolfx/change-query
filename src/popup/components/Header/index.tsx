@@ -1,6 +1,6 @@
 import { CSSProperties, FC } from 'react';
-import { ChristmasTree } from '../Icon';
-import style from './index.module.less';
+import { LogoIcon, SettingIcon } from '../../../components/Icon';
+import styles from './index.module.less';
 import classNames from 'classnames';
 export type HeaderProps = {
   className?: string;
@@ -9,9 +9,14 @@ export type HeaderProps = {
 
 const Header: FC<HeaderProps> = (props) => {
   return (
-    <div className={classNames(style.header, props.className)}>
-      <ChristmasTree className={style.logo} />
-      <div className={style.right}>Christmas</div>
+    <div className={classNames(styles.header, props.className)}>
+      <div className={styles.left}>
+        <LogoIcon className={styles.logo} />
+        <div className={styles.title}>Magpie</div>
+      </div>
+      <SettingIcon className={styles.setting} onClick={() => {
+        chrome.runtime.openOptionsPage();
+      }} />
     </div>
   );
 };

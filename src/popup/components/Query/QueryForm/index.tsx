@@ -2,14 +2,12 @@ import React, {
   CSSProperties,
   ForwardRefRenderFunction,
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useRef,
 } from 'react';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Form, FormInstance, Input, Row } from 'antd';
 import styles from './index.module.less';
-import { useMemoizedFn } from 'ahooks';
 
 const formItemLayout = {
   labelCol: {
@@ -41,7 +39,6 @@ export type QueryFormType = {
 export type QueryFormProps = {
   className?: string;
   style?: CSSProperties;
-  onChangeQuery?: (query: QueryType[]) => void;
 };
 
 export type QueryFormRef = {
@@ -53,15 +50,7 @@ const QueryForm: ForwardRefRenderFunction<QueryFormRef, QueryFormProps> = (
   ref
 ) => {
   const [formInstance] = Form.useForm<QueryFormType>();
-  const query = Form.useWatch('query', formInstance);
-  const buttonRef = useRef<HTMLButtonElement>(null)
-
-  const onChangeQueryMemo = useMemoizedFn(props?.onChangeQuery || (() => {}));
-
-  useEffect(() => {
-    const formatedQueryData = query?.filter?.((item) => item?.key);
-    onChangeQueryMemo(formatedQueryData);
-  }, [onChangeQueryMemo, query]);
+  const htmlRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
     formInstance,
@@ -114,11 +103,13 @@ const QueryForm: ForwardRefRenderFunction<QueryFormRef, QueryFormProps> = (
               <Form.Item>
                 <Button
                   type="dashed"
-                  ref={buttonRef}
                   onClick={async () => {
                     try {
                       await formInstance.validateFields();
                       add();
+                      htmlRef.current?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
                     } catch (error) {
                       console.log(error);
                     }
@@ -128,7 +119,7 @@ const QueryForm: ForwardRefRenderFunction<QueryFormRef, QueryFormProps> = (
                 >
                   添加参数
                 </Button>
-                <Form.ErrorList errors={errors} />
+                <div style={{ height: 50, width: '100%' }} ref={htmlRef}></div>
               </Form.Item>
             </>
           )}

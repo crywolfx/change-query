@@ -48,7 +48,6 @@ const Content: FC<ContentProps> = (props) => {
         searchParams.append(query.key, query.value || '');
       });
 
-      console.log(urlRef.current);
       const currentUrl = new URL(urlRef.current || '');
       currentUrl.search = searchParams.toString();
 
@@ -80,6 +79,8 @@ const Content: FC<ContentProps> = (props) => {
         onChange={(val) => {
           urlRef.current = val;
           setUrl(val);
+        }}
+        onBlur={(val) => {
           setQueryListByUrl(val);
         }}
       />

@@ -12,6 +12,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     manifest_version: 3,
     name: isProduction ? name : `[development]${name}`,
     offline_enabled: true,
+    options_page: 'options.html',
     permissions: [
       'tabs',
       'activeTab',

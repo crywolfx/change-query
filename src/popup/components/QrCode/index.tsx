@@ -10,6 +10,7 @@ export type QrCodeProps = {
   defaultValue?: string;
   value?: string;
   onChange?: (val: string) => void;
+  onBlur?: (val: string) => void;
 };
 const QrCode: FC<QrCodeProps> = (props) => {
   const [text, setText] = useState(props.value || props.defaultValue);
@@ -29,6 +30,9 @@ const QrCode: FC<QrCodeProps> = (props) => {
           onChange={(e) => {
             setText(e.target.value);
             props.onChange?.(e.target.value);
+          }}
+          onBlur={() => {
+            props.onBlur?.(text || '');
           }}
         />
       </Space>
